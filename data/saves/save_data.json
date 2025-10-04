@@ -1,0 +1,71 @@
+{
+  "version": "0.3.1",
+  "created_at": "2025-10-04T00:51:35.830825",
+  "last_played": "2025-10-04T00:57:58.126817",
+  "player": {
+    "name": "edy",
+    "gender": "male"
+  },
+  "progress": {
+    "current_scene": "cave",
+    "bedroom_position": {
+      "x": 204,
+      "y": 204
+    },
+    "bedroom_visited": true,
+    "intro_completed": true,
+    "outside_position": {
+      "x": 1230,
+      "y": 122
+    },
+    "cave_position": {
+      "x": 505,
+      "y": 216
+    },
+    "old_man_pokeball_taken": true
+  },
+  "pokemon": {
+    "party": [],
+    "storage": [],
+    "next_id": 1
+  },
+  "flags": {
+    "has_starter": false,
+    "first_battle_complete": false
+  },
+  "playtime_seconds": 0,
+  "party": [
+    {
+      "name": "Charmander",
+      "nickname": "Ember",
+      "level": 5,
+      "exp": 0,
+      "hp": 0,
+      "max_hp": 25,
+      "attack": 12,
+      "defense": 10,
+      "speed": 15,
+      "type": [
+        "Fire"
+      ],
+      "moves": [
+        {
+          "name": "Scratch",
+          "pp": 35,
+          "max_pp": 35,
+          "power": 40,
+          "type": "Normal"
+        },
+        {
+          "name": "Ember",
+          "pp": 25,
+          "max_pp": 25,
+          "power": 40,
+          "type": "Fire"
+        }
+      ],
+      "status": null,
+      "corrupted": true
+    }
+  ]
+}

@@ -1,0 +1,426 @@
+# Pokémon Faiths - Complete Game Design Document for Cursor AI
+
+## Project Overview
+
+Pokémon Faiths is a dark, survival-focused reimagining of Pokémon built in Pygame. The game replaces traditional progression mechanics with a consequence-driven system where every battle matters, Pokémon can permanently die or be injured, and player skill directly determines outcomes.
+
+**Core Philosophy**: Interaction-first design where every element—from the start screen to battle decisions—requires active player engagement rather than passive number watching.
+
+---
+
+## 1. The Veteran System (Core Innovation)
+
+### Purpose
+Replace traditional XP/leveling with a **history-based progression system** that reflects actual player skill and strategic choices.
+
+### How It Works
+
+**Hidden Battle Log (per Pokémon)**
+- Circular buffer storing last ~200 battles
+- Each entry records:
+  - `timestamp` / battle index
+  - `opponent_id` and `opponent_veterancy` (difficulty indicator)
+  - `moves_used` (list + effectiveness flags)
+  - `damage_taken` (type, source, body location)
+  - `damage_dealt`
+  - `status_events` (stagger, blind, limb loss, fear, obedience failures)
+  - `outcome` (win / survive+retreat / faint / killed)
+  - `player_tactics` (defensive, aggressive, baited, combo)
+  - `environment_tags` (terrain, weather, hazards)
+
+**Growth Calculation**
+```
+EffectiveVeteranScore = f(CombatExperience, AdaptationScore) - g(TraumaScore, InjurySeverity)
+```
+
+- **Combat Experience**: Increases from successful tactics, varied move usage, surviving tough opponents, close losses fought well
+- **Adaptation Score**: Improves when Pokémon learns counters, adjusts to patterns, forces enemy adaptations
+- **Trauma Score**: Increases from heavy damage, emotional events, repeated failures
+- **Injury Severity**: Permanent physical penalties from catastrophic damage
+
+**Decay System**
+- Exponential decay: older entries contribute less with each new battle
+- Recent ~50 battles have primary influence
+- **Exception**: Flagged `PermanentInjury` events never decay
+- Allows Pokémon to "move on" from old trauma while carrying lasting scars
+
+**Key Principles**
+- Growth ≠ trauma (injuries weaken, experience strengthens)
+- **Dual outcomes possible**: Pokémon can simultaneously gain tactical skill AND suffer permanent stat penalties
+- **Survival-first**: Dead Pokémon learn nothing; retreat is valid strategy
+- **Context-dependent learning**: Strong opponents teach more than weak ones
+- **Anti-cheat**: Farming weak enemies has vanishing returns
+
+---
+
+## 2. Combat System Design
+
+### No Health Bars
+**Descriptive State System** instead of HP numbers:
+
+**Text Cues**
+- "Standing strong but breathing hard"
+- "Staggered — switch window opens"
+- "Seems too afraid to move"
+- "Limb injured — mobility reduced"
+- "On the brink of collapse"
+
+**Visual Cues**
+- Limping animations
+- Slowed movement
+- Blood/stitch sprite overlays
+- Missing limb sprites
+- Clouded-eye overlay for blindness
+
+**Tactical Prompts**
+- "Opponent is winding up a finishing strike" (telegraph)
+- "[Switch? 2s]" (stumble window after heavy hit)
+
+### Combat Flow
+1. Turn-based system (traditional Pokémon structure)
+2. Player reads descriptive state, not numbers
+3. Decisions based on observation: attack, switch, retreat, or use item
+4. **Withdrawal is strategic**: preserving life > winning at all costs
+5. After battle: log updates, injuries may trigger, Veteran Score recalculates
+
+### "Losing Well" vs "Losing Badly"
+
+**Losing Badly**
+- Overwhelmed quickly
+- Contributing negligible pressure
+- Result: High `TraumaScore`, minimal `CombatExperience` gain
+
+**Losing Well**
+- Close, instructive fight
+- Varied tactics attempted
+- Forced enemy adaptations
+- Result: Significant `CombatExperience` gain, modest trauma increase
+
+**Design Rule**: Reward meaningful participation (effort, timing, varied moves), not just outcome.
+
+---
+
+## 3. Permanent Injuries System
+
+### Trigger Conditions
+Permanent injuries occur only from:
+- Massive damage to specific body region in single hit
+- Repeated identical damage type within short time window
+- Special scripted attacks
+- **Not** from every big hit—only extreme, threshold-crossing events
+
+### Severity Tiers
+
+**Minor** (temporary penalties, may heal)
+- Fatigue
+- Minor wounds
+- Temporary fear
+
+**Major** (permanent stat modifiers)
+- Deep Scar: +Attack, -Speed
+- Burn Scar: +Sp.Atk, -Sp.Def
+- Lost Eye: +Evasion, -Accuracy
+- Broken Limb: +Defense, -Mobility
+- Emotional Trauma: +Focus, -Obedience
+
+**Catastrophic** (game-changing)
+- Lost Limb: Cannot use certain moves, major mobility loss
+- Blindness: Requires extensive training to obey, heightened senses when mastered
+- Faith Awakening: Near-death unlocks unique ability (rare)
+
+### Prosthetics System
+- **Only available to Will of the Struggler holders**
+- Normal Pokémon cannot adapt to prosthetics
+- Reduces debuffs but doesn't eliminate them
+- Expensive/rare resource sink
+- May introduce side-effects
+
+---
+
+## 4. Will of the Struggler (VoS)
+
+### Concept
+Inspired by Guts from Berserk: a Pokémon that refuses to break despite catastrophic trauma.
+
+### Acquisition (All Required)
+
+**Path 1: Innate (Ultra-Rare)**
+- 1 in 10 million chance at birth/catch
+- Thematic flavor for wild exceptions
+
+**Path 2: Earned Through Trauma** (Primary route)
+1. **Long-term bond**: Months of in-world time or 50+ significant battles together
+2. **Catastrophic survival event**:
+   - Canonical: Entire party wiped except this Pokémon
+   - Environmental disaster survival
+   - Overwhelming boss encounter
+3. **Species eligibility**: Normal/Shiny only (no legendaries)
+4. **Non-farmable**: Event must be non-repeatable, save-flagged
+5. **Probability check**: Even if conditions met, tiny random chance (preserves rarity)
+
+### Mechanical Effects
+
+**Permanent Status**
+- Cannot be removed once granted
+- Unique aura/scar pattern visual
+- Special badge in summary: "Survived the unthinkable; refuses to break"
+
+**Gameplay Bonuses**
+- Largely bypasses stat penalties from permanent injuries
+- Accelerated recovery from wounds/debuffs
+- Advanced adaptive AI (learns counters faster)
+- Prosthetic compatibility unlocked
+- Rage-driven power bursts (emergency ability)
+- Very low mortality chance under normal conditions
+
+**NOT a Win Button**
+- Still requires player skill and strategic switching
+- Vulnerable to overwhelming coordinated attacks
+- Legendary-tier scripted moves can kill if mismanaged
+- Resource costs for maintenance (prosthetics, rehab)
+
+### Balancing
+- Extreme rarity (1 in 10M) is primary balance factor
+- Design boss encounters that test VoS limits
+- Multi-target combos, stagger-waves, area hazards as counters
+- Costly upkeep prevents autopilot gameplay
+
+---
+
+## 5. Pokémon Mortality & Lifespan
+
+### Pokéball Lifespan Mechanic
+- **100-year maximum** for captured Pokémon
+- After 100 years, Pokéball closes permanently → Pokémon dies
+- Cannot be released before death; ball forcibly recalls dying Pokémon
+- Near-100-year Pokémon are extremely powerful veterans
+
+### Wild Pokémon
+- **No age limit** in the wild
+- Can live indefinitely if they survive
+- 100+ year wild Pokémon exist but are:
+  - **Rarer than legendaries**
+  - Often veterans with extensive scars/adaptations
+  - Extremely powerful from accumulated experience
+  - Can be caught and then live to 200+ years in ball
+
+### Death Mechanics
+- Pokémon can die permanently in battle
+- Death triggers from:
+  - Health state reaching "killed"
+  - Catastrophic environmental damage
+  - Ignoring withdrawal prompts when critical
+- **No revives, no Phoenix Downs**
+- Mourning/tribute flow shown when death occurs
+
+---
+
+## 6. Story & World
+
+### Opening: Exile Day (Lore Only, Not Recurring Mechanic)
+
+**Setting**: Harsh village with scarce resources
+
+**Exile Day Ritual** (monthly)
+- Villagers vote to exile one person
+- Two destinations offered:
+  - **Forest**: Small survival chance, can take one Pokémon
+  - **Cave**: Near-certain death, swift
+
+**Player's Story**
+1. Witness old man choose Cave → hear his screams → silence
+2. One month later: Player is chosen for exile
+3. Player chooses Cave (dialogue: "I don't see the point of living further in this meaningless world anyway")
+4. Inside Cave:
+   - Find old man's torn body
+   - Discover dying Pokéball (nearly 100 years old)
+   - Contains blind veteran Pokémon, hours from permanent death
+   - Risky decision: attempt to bond with it
+5. Deep in cave: find mysterious egg
+6. Return to village → elders grant one week before forest exile begins
+7. Egg hatches → tutorial Pokémon OR choose to use blind veteran (hard mode)
+
+**Purpose**
+- Establishes harsh world tone immediately
+- Shows mortality stakes
+- Introduces scarcity theme
+- Provides inciting incident
+- **Not a recurring gameplay mechanic** after intro
+
+### World Themes
+- Survival over heroics
+- Resources are genuinely scarce
+- Trust is rare, earned slowly
+- Pokémon are living beings, not tools
+- History and scars define identity
+
+---
+
+## 7. Technical Implementation
+
+### Current Code Status
+
+**Completed**
+- `start_screen.py`: Cinematic candle with procedural flame, particle smoke, heat haze
+- `asset_manager.py`: Cached loading for sprites/sounds
+- `audio_manager.py`: Music/SFX system
+- `constants.py`: Centralized config (colors, dimensions, speeds)
+- `ui_components.py`: Reusable Button, VignetteEffect
+- `bedroom.py`: Player controller with y-sort, collision system (50% complete)
+- `game_debugger.py`: Debug overlay, collision visualization
+
+**Architecture**
+- State machine pattern (main.py → start_screen → intro_sequence → bedroom → battle)
+- Manager singletons for clean global access
+- Pre-rendering for performance (gradients, candle body)
+- Asset caching to avoid repeated disk reads
+
+### Next Implementation Steps
+
+**Priority 1: Finish Bedroom**
+- Implement interaction system (examine objects, trigger events)
+- Create basic NPC dialogue system
+- Add event trigger for first battle
+
+**Priority 2: Build Battle System Framework**
+- Turn-based battle scene
+- Descriptive state system (text + visuals)
+- Basic move logic (affects state, not HP numbers)
+- Switch/retreat mechanics
+
+**Priority 3: Integrate Veteran System**
+- Implement circular buffer battle log (data structure)
+- Write-to-log after each battle
+- Create injury trigger logic (threshold checks)
+- Connect log to stat calculations
+- Decay function for old entries
+
+**Priority 4: Create Vertical Slice**
+- Bedroom → First battle → Log updates → Injury possibility → Return to bedroom
+- 5-minute playable loop proving core mechanics work
+
+### Data Structures
+
+**Pokémon Class (Simplified)**
+```python
+class Pokemon:
+    def __init__(self):
+        self.species = ""
+        self.battle_log = []  # Circular buffer, max 200 entries
+        self.permanent_injuries = []  # Flags that don't decay
+        self.has_vos = False
+        self.prosthetics = []
+        
+        # Calculated from log
+        self.combat_experience = 0
+        self.adaptation_score = 0
+        self.trauma_score = 0
+        self.injury_severity = 0
+        
+    def calculate_veteran_score(self):
+        # Aggregate log → compute scores → apply decay → return net effect
+        pass
+        
+    def get_descriptive_state(self):
+        # Return text like "Standing strong but breathing hard"
+        pass
+```
+
+**Battle Log Entry**
+```python
+{
+    'timestamp': int,
+    'opponent_id': str,
+    'opponent_veterancy': float,
+    'moves_used': [{'move': str, 'effective': bool}],
+    'damage_taken': {'amount': float, 'type': str, 'location': str},
+    'damage_dealt': float,
+    'status_events': ['stagger', 'limb_lost', etc.],
+    'outcome': 'win' | 'retreat' | 'faint' | 'killed',
+    'player_tactics': ['defensive', 'baited', etc.],
+    'environment': ['rain', 'forest', etc.]
+}
+```
+
+---
+
+## 8. Design Principles Summary
+
+### Core Pillars
+1. **Consequence > Convenience**: Every choice has lasting impact
+2. **Player Skill = Progression**: System measures how well you play
+3. **Survival First**: Retreat is valid; recklessness kills
+4. **History Shapes Identity**: Past experiences define current state
+5. **Interaction-First**: Active engagement over passive watching
+
+### What Makes This Different
+- **No grinding**: Context-dependent learning, not repetition
+- **Dual progression**: Can get stronger AND weaker simultaneously
+- **Emergent narrative**: Every Pokémon tells unique story through scars
+- **Anti-exploit design**: Can't farm weak enemies for power
+- **Player skill reflection**: Veterans show your mastery, not just time invested
+
+### Difficulty Philosophy
+- Like Elden Ring: difficulty scales with player decisions
+- Careful play = survivable experience
+- Reckless play = real consequences
+- **Challenge, not punishment**: Fair but unforgiving
+
+---
+
+## 9. Visual/Audio Style
+
+### Graphics
+- Pixel art aesthetic (Gen 4 Pokémon style)
+- Muted color palette emphasizing browns, grays, dark greens
+- Worn textures (rust, cracks, dust)
+- Atmospheric lighting (candles, fog, shadows)
+- Scar/injury sprites overlay on Pokémon
+
+### Audio
+- Moody, atmospheric music (not cheerful)
+- Crisp UI sounds
+- Environmental ambience (wind, dripping water, distant sounds)
+- No victory fanfares—subdued acknowledgment
+
+### UI Design
+- Dark theme with stone/wood textures
+- Minimal HUD (no visible HP/XP bars)
+- Text-heavy feedback system
+- Subtle vignette effects
+- Debug mode with collision visualization
+
+---
+
+## 10. Scope Notes for Cursor AI
+
+### Build Order Priority
+1. Finish bedroom interaction system
+2. Create battle system framework with descriptive states
+3. Implement basic Veteran System (log + one injury type)
+4. Test vertical slice
+5. Expand move variety
+6. Add more injury types
+7. Implement VoS acquisition trigger
+8. Build prosthetics system
+9. Expand world/story
+
+### What NOT to Build Yet
+- Full Pokédex
+- Complete move list
+- All injury types
+- VoS system (until basic Veteran System works)
+- Multiple areas/towns
+- NPC trainers
+
+### Testing Priorities
+- Battle log correctly records events
+- Decay function works as intended
+- Injury triggers fire at correct thresholds
+- Descriptive text accurately reflects state
+- Player can retreat successfully
+- VoS acquisition triggers only under correct conditions
+
+---
+
+This document contains everything needed to understand and implement Pokémon Faiths. The Veteran System is the core innovation; all other systems support or extend it.
