@@ -1,0 +1,399 @@
+import pygame
+import sys
+import math
+import json
+import os
+from constants import DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT, Colors
+from ui_components import GradientBackground, VignetteEffect
+
+class Slider:
+    def __init__(self, x, y, width, height, min_value=0, max_value=100, current_value=100):
+        self.rect = pygame.Rect(x, y, width, height)
+        self.min_value = min_value
+        self.max_value = max_value
+        self.current_value = current_value
+        self.is_dragging = False
+        self.handle_radius = 12
+        self.handle_color = Colors.TEXT_PRIMARY
+        self.bar_color = Colors.BUTTON_NORMAL
+        self.label_font = pygame.font.SysFont("georgia", 24)
+        self.previous_value = current_value  # Track value changes
+        
+    def draw(self, surface, label):
+        # Draw bar
+        pygame.draw.rect(surface, self.bar_color, self.rect, border_radius=5)
+        
+        # Calculate handle position
+        value_ratio = (self.current_value - self.min_value) / (self.max_value - self.min_value)
+        handle_x = self.rect.x + (self.rect.width * value_ratio)
+        handle_y = self.rect.centery
+        
+        # Draw handle with glow effect
+        glow_radius = self.handle_radius + 4
+        glow_surface = pygame.Surface((glow_radius * 2, glow_radius * 2), pygame.SRCALPHA)
+        pygame.draw.circle(glow_surface, (*self.handle_color, 100), (glow_radius, glow_radius), glow_radius)
+        surface.blit(glow_surface, (handle_x - glow_radius, handle_y - glow_radius))
+        pygame.draw.circle(surface, self.handle_color, (handle_x, handle_y), self.handle_radius)
+        
+        # Draw label and value
+        label_surface = self.label_font.render(f"{label}: {int(self.current_value)}%", True, self.handle_color)
+        surface.blit(label_surface, (self.rect.x, self.rect.y - 30))
+    
+    def handle_event(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = event.pos
+            handle_x = self.rect.x + (self.rect.width * ((self.current_value - self.min_value) / (self.max_value - self.min_value)))
+            handle_rect = pygame.Rect(handle_x - self.handle_radius, self.rect.centery - self.handle_radius,
+                                    self.handle_radius * 2, self.handle_radius * 2)
+            if handle_rect.collidepoint(mouse_x, mouse_y):
+                self.is_dragging = True
+        
+        elif event.type == pygame.MOUSEBUTTONUP:
+            self.is_dragging = False
+        
+        elif event.type == pygame.MOUSEMOTION and self.is_dragging:
+            mouse_x = event.pos[0]
+            relative_x = mouse_x - self.rect.x
+            value_ratio = max(0, min(1, relative_x / self.rect.width))
+            self.current_value = self.min_value + (self.max_value - self.min_value) * value_ratio
+            
+            # Return True if value changed
+            if self.current_value != self.previous_value:
+                self.previous_value = self.current_value
+                return True
+        return False
+
+class ResolutionSelector:
+    def __init__(self, x, y, width, height, resolutions):
+        self.rect = pygame.Rect(x, y, width, height)
+        self.resolutions = resolutions
+        self.current_index = 0
+        self.font = pygame.font.SysFont("georgia", 24)
+        self.label_font = pygame.font.SysFont("georgia", 24)
+        self.is_hovered = False
+        
+        # Colors
+        self.normal_color = (100, 80, 60)
+        self.hover_color = (200, 170, 140)
+        self.text_color = (200, 170, 140)
+        self.hover_text_color = (20, 10, 15)
+        
+        # Arrow buttons
+        arrow_width = 30
+        self.left_arrow = pygame.Rect(x - arrow_width - 10, y, arrow_width, height)
+        self.right_arrow = pygame.Rect(x + width + 10, y, arrow_width, height)
+    
+    def draw(self, surface):
+        # Draw main button
+        color = self.hover_color if self.is_hovered else self.normal_color
+        text_color = self.hover_text_color if self.is_hovered else self.text_color
+        pygame.draw.rect(surface, color, self.rect, border_radius=5)
+        
+        # Draw arrows
+        pygame.draw.rect(surface, color, self.left_arrow, border_radius=5)
+        pygame.draw.rect(surface, color, self.right_arrow, border_radius=5)
+        
+        # Draw resolution text
+        resolution_text = f"{self.resolutions[self.current_index][0]}x{self.resolutions[self.current_index][1]}"
+        text_surface = self.font.render(resolution_text, True, text_color)
+        text_rect = text_surface.get_rect(center=self.rect.center)
+        surface.blit(text_surface, text_rect)
+        
+        # Draw arrow symbols
+        left_arrow_text = self.font.render("<", True, text_color)
+        right_arrow_text = self.font.render(">", True, text_color)
+        surface.blit(left_arrow_text, (self.left_arrow.centerx - 5, self.left_arrow.centery - 12))
+        surface.blit(right_arrow_text, (self.right_arrow.centerx - 5, self.right_arrow.centery - 12))
+        
+        # Draw label
+        label_surface = self.label_font.render("Resolution:", True, self.text_color)
+        surface.blit(label_surface, (self.rect.x, self.rect.y - 30))
+    
+    def handle_event(self, event):
+        if event.type == pygame.MOUSEMOTION:
+            mouse_pos = event.pos
+            self.is_hovered = (self.rect.collidepoint(mouse_pos) or 
+                             self.left_arrow.collidepoint(mouse_pos) or 
+                             self.right_arrow.collidepoint(mouse_pos))
+        
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_pos = event.pos
+            if self.left_arrow.collidepoint(mouse_pos):
+                self.current_index = (self.current_index - 1) % len(self.resolutions)
+                return True
+            elif self.right_arrow.collidepoint(mouse_pos):
+                self.current_index = (self.current_index + 1) % len(self.resolutions)
+                return True
+        return False
+
+class SettingsMenu:
+    def __init__(self):
+        # Screen settings
+        self.SCREEN_WIDTH = DEFAULT_SCREEN_WIDTH
+        self.SCREEN_HEIGHT = DEFAULT_SCREEN_HEIGHT
+        self.screen = pygame.display.set_mode((self.SCREEN_WIDTH, self.SCREEN_HEIGHT), pygame.FULLSCREEN)
+        pygame.display.set_caption("Settings - Pokémon Faiths")
+        
+        # Time tracking
+        self.clock = pygame.time.Clock()
+        self.time = 0
+        self.running = True
+        
+        # Colors
+        self.BACKGROUND_COLOR_TOP = Colors.BACKGROUND_TOP
+        self.BACKGROUND_COLOR_BOTTOM = Colors.BACKGROUND_BOTTOM
+        
+        # Load or create settings
+        self.settings = self.load_settings()
+        
+        # Create UI elements
+        self.create_ui_elements()
+        
+        # Title settings
+        self.title_font = pygame.font.SysFont("georgia", 60, bold=True)
+        self.title_color = Colors.TEXT_PRIMARY
+        
+        # Back button
+        self.back_button = pygame.Rect(50, self.SCREEN_HEIGHT - 80, 100, 40)
+        self.back_button_font = pygame.font.SysFont("georgia", 24)
+        self.back_button_color = Colors.BUTTON_NORMAL
+        self.back_button_hover = False
+        
+        # Create optimized UI components
+        self.background = GradientBackground(self.SCREEN_WIDTH, self.SCREEN_HEIGHT, 
+                                           self.BACKGROUND_COLOR_TOP, self.BACKGROUND_COLOR_BOTTOM)
+        self.vignette = VignetteEffect(self.SCREEN_WIDTH, self.SCREEN_HEIGHT)
+    
+    def create_ui_elements(self):
+        # Available resolutions (based on 1366x768 screen)
+        self.resolutions = [
+            (1366, 768),  # Native
+            (1280, 720),  # 720p
+            (1024, 576),  # 16:9
+            (800, 450),   # 16:9
+        ]
+        
+        # Find current resolution index
+        current_res_index = 0
+        current_res = (self.settings['resolution_width'], self.settings['resolution_height'])
+        if current_res in self.resolutions:
+            current_res_index = self.resolutions.index(current_res)
+        
+        # Create UI controls
+        center_x = self.SCREEN_WIDTH // 2
+        start_y = 250
+        spacing = 100
+        
+        self.resolution_selector = ResolutionSelector(
+            center_x - 150, start_y,
+            300, 40,
+            self.resolutions
+        )
+        self.resolution_selector.current_index = current_res_index
+        
+        self.master_volume = Slider(
+            center_x - 150, start_y + spacing,
+            300, 10,
+            current_value=self.settings['master_volume']
+        )
+        
+        self.music_volume = Slider(
+            center_x - 150, start_y + spacing * 2,
+            300, 10,
+            current_value=self.settings['music_volume']
+        )
+        
+        self.sfx_volume = Slider(
+            center_x - 150, start_y + spacing * 3,
+            300, 10,
+            current_value=self.settings['sfx_volume']
+        )
+    
+    def load_settings(self):
+        default_settings = {
+            'resolution_width': 1366,
+            'resolution_height': 768,
+            'master_volume': 100,
+            'music_volume': 100,
+            'sfx_volume': 100
+        }
+        
+        try:
+            if os.path.exists('settings.json'):
+                with open('settings.json', 'r') as f:
+                    return json.load(f)
+        except:
+            pass
+        
+        return default_settings
+    
+    def save_settings(self):
+        current_res = self.resolutions[self.resolution_selector.current_index]
+        settings = {
+            'resolution_width': current_res[0],
+            'resolution_height': current_res[1],
+            'master_volume': self.master_volume.current_value,
+            'music_volume': self.music_volume.current_value,
+            'sfx_volume': self.sfx_volume.current_value
+        }
+        
+        with open('settings.json', 'w') as f:
+            json.dump(settings, f)
+    
+    # Vignette creation now handled by VignetteEffect class
+    
+    def draw_background(self):
+        """Draws the pre-rendered gradient background."""
+        self.background.draw(self.screen)
+    
+    def draw_title(self):
+        """Draws the settings title with a subtle animation."""
+        title_text = "SETTINGS"
+        title_y = 100
+        
+        # Add subtle floating animation
+        offset = math.sin(self.time) * 5
+        
+        # Draw main title
+        title_surface = self.title_font.render(title_text, True, self.title_color)
+        title_rect = title_surface.get_rect(
+            center=(self.SCREEN_WIDTH // 2, title_y + offset))
+        self.screen.blit(title_surface, title_rect)
+        
+        # Add subtle glow effect
+        glow_alpha = int((math.sin(self.time * 2) + 1) / 2 * 100)
+        glow_surface = pygame.Surface(
+            (title_surface.get_width() + 20, title_surface.get_height() + 20),
+            pygame.SRCALPHA
+        )
+        glow_color = (*self.title_color, glow_alpha)
+        glow_text = self.title_font.render(title_text, True, glow_color)
+        glow_rect = glow_text.get_rect(center=(glow_surface.get_width() // 2,
+                                              glow_surface.get_height() // 2))
+        glow_surface.blit(glow_text, glow_rect)
+        self.screen.blit(glow_surface, 
+                        (title_rect.x - 10, title_rect.y - 10))
+    
+    def draw_back_button(self):
+        """Draws the back button with enhanced hover effects."""
+        color = Colors.BUTTON_HOVER if self.back_button_hover else Colors.BUTTON_NORMAL
+        text_color = Colors.BUTTON_TEXT_HOVER if self.back_button_hover else Colors.BUTTON_TEXT_NORMAL
+        
+        if self.back_button_hover:
+            # Add glow effect for hover
+            pulse = (math.sin(self.time * 3) + 1) / 2
+            expanded_rect = self.back_button.inflate(10, 5)
+            
+            # Outer glow
+            glow_surf = pygame.Surface((expanded_rect.width + 20, expanded_rect.height + 20), pygame.SRCALPHA)
+            glow_alpha = int(60 * pulse)
+            pygame.draw.rect(glow_surf, (*color, glow_alpha), glow_surf.get_rect(), border_radius=10)
+            self.screen.blit(glow_surf, (expanded_rect.x - 10, expanded_rect.y - 10))
+            
+            # Main button
+            pygame.draw.rect(self.screen, color, expanded_rect, border_radius=5)
+            
+            # Bright border
+            border_color = (min(255, color[0] + 40), min(255, color[1] + 40), min(255, color[2] + 40))
+            pygame.draw.rect(self.screen, border_color, expanded_rect, width=2, border_radius=5)
+            
+            # Text
+            text = self.back_button_font.render("Back", True, text_color)
+            text_rect = text.get_rect(center=expanded_rect.center)
+            self.screen.blit(text, text_rect)
+        else:
+            # Normal state with subtle border
+            pygame.draw.rect(self.screen, color, self.back_button, border_radius=5)
+            border_color = (color[0] + 20, color[1] + 20, color[2] + 20)
+            pygame.draw.rect(self.screen, border_color, self.back_button, width=1, border_radius=5)
+            
+            text = self.back_button_font.render("Back", True, text_color)
+            text_rect = text.get_rect(center=self.back_button.center)
+            self.screen.blit(text, text_rect)
+    
+    def handle_events(self):
+        """Handle all pygame events."""
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT or (
+                event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE
+            ):
+                self.save_settings()
+                return True
+            
+            # Handle UI events
+            self.resolution_selector.handle_event(event)
+            
+            # Handle volume sliders (audio functionality removed)
+        if self.master_volume.handle_event(event):
+            from core.audio_manager import get_audio_manager
+            audio = get_audio_manager()
+            # Master volume affects both music and SFX
+            audio.set_music_volume(self.master_volume.current_value / 100.0)
+            audio.set_sfx_volume(self.master_volume.current_value / 100.0)
+            
+            if self.music_volume.handle_event(event):
+                from core.audio_manager import get_audio_manager
+                audio = get_audio_manager()
+                audio.set_music_volume(self.music_volume.current_value / 100.0)
+            
+            if self.sfx_volume.handle_event(event):
+                from core.audio_manager import get_audio_manager
+                audio = get_audio_manager()
+                audio.set_sfx_volume(self.sfx_volume.current_value / 100.0)
+            
+            # Handle back button
+            if event.type == pygame.MOUSEMOTION:
+                self.back_button_hover = self.back_button.collidepoint(event.pos)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if self.back_button.collidepoint(event.pos):
+                    self.save_settings()
+                    return True
+        
+        return False
+    
+    def update(self):
+        """Update menu state."""
+        dt = self.clock.tick(60) / 1000.0
+        self.time += dt
+    
+    def render(self):
+        """Render the settings screen."""
+        # Draw background
+        self.draw_background()
+        
+        # Draw title
+        self.draw_title()
+        
+        # Draw UI elements
+        self.resolution_selector.draw(self.screen)
+        self.master_volume.draw(self.screen, "Master Volume")
+        self.music_volume.draw(self.screen, "Music Volume")
+        self.sfx_volume.draw(self.screen, "SFX Volume")
+        
+        # Draw back button
+        self.draw_back_button()
+        
+        # Apply vignette
+        self.vignette.draw(self.screen)
+        
+        # Update display
+        pygame.display.flip()
+    
+    def run(self):
+        """Main settings loop."""
+        while self.running:
+            if self.handle_events():
+                break
+            
+            self.update()
+            self.render()
+        
+        return self.settings
+
+if __name__ == "__main__":
+    # This is just for testing the settings menu directly
+    settings = SettingsMenu()
+    final_settings = settings.run()
+    print("Final settings:", final_settings)
+    pygame.quit()
+    sys.exit()
