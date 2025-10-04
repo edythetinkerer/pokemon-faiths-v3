@@ -1,0 +1,52 @@
+2025-10-04 00:42:04,844 | INFO     | PokemonFaiths   | Logging to file: logs\game_20251004_004204.log
+2025-10-04 00:42:04,847 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Starting ===
+2025-10-04 00:42:05,741 | INFO     | PokemonFaiths.Main | Pygame initialized successfully
+2025-10-04 00:42:05,742 | INFO     | PokemonFaiths.AudioManager | Audio system initialized successfully
+2025-10-04 00:42:05,743 | INFO     | PokemonFaiths.Settings | Loaded settings: Music=100%, SFX=100%
+2025-10-04 00:42:05,747 | INFO     | PokemonFaiths.AudioManager | Playing music: menu
+2025-10-04 00:42:05,747 | INFO     | PokemonFaiths.StartScreen | Save file exists: True
+2025-10-04 00:42:05,852 | INFO     | PokemonFaiths.StartScreen | Starting Pokémon Faiths start screen...
+2025-10-04 00:42:06,922 | INFO     | PokemonFaiths.StartScreen | Start screen exited with selection: new_game
+2025-10-04 00:42:06,926 | INFO     | PokemonFaiths.Main | Starting new game...
+2025-10-04 00:42:06,940 | INFO     | PokemonFaiths.IntroSequence | Elder sprite loaded successfully
+2025-10-04 00:42:06,945 | INFO     | PokemonFaiths.IntroSequence | Intro sequence initialized
+2025-10-04 00:42:06,946 | INFO     | PokemonFaiths.IntroSequence | Starting intro sequence...
+2025-10-04 00:42:15,490 | INFO     | PokemonFaiths.IntroSequence | Intro complete - Player: edy, Gender: male
+2025-10-04 00:42:15,491 | INFO     | PokemonFaiths.Main | Character created: edy
+2025-10-04 00:42:15,492 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:42:15,492 | INFO     | PokemonFaiths.SaveManager | New save created for player: edy
+2025-10-04 00:42:15,492 | INFO     | PokemonFaiths.Main | Save file created, starting game loop...
+2025-10-04 00:42:15,668 | INFO     | PokemonFaiths.Bedroom | Bedroom assets loaded successfully
+2025-10-04 00:42:15,669 | INFO     | PokemonFaiths.Bedroom | Loading player position from save: (204, 204)
+2025-10-04 00:42:15,791 | INFO     | PokemonFaiths.Bedroom | Bedroom scene initialized
+2025-10-04 00:42:15,792 | INFO     | PokemonFaiths.Bedroom | Bedroom scene started
+2025-10-04 00:42:18,706 | INFO     | PokemonFaiths.Bedroom | Eye opening animation complete
+2025-10-04 00:42:21,736 | INFO     | PokemonFaiths.Bedroom | Player stepped on teleport rug - going outside!
+2025-10-04 00:42:21,737 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:42:21,738 | INFO     | PokemonFaiths.Bedroom | Set outside spawn to: (332, 222)
+2025-10-04 00:42:21,744 | INFO     | PokemonFaiths.Bedroom | Bedroom scene exited
+2025-10-04 00:42:21,746 | INFO     | PokemonFaiths.Main | Teleporting to outside scene...
+2025-10-04 00:42:21,886 | INFO     | PokemonFaiths.Outside | Outdoor assets loaded
+2025-10-04 00:42:21,886 | INFO     | PokemonFaiths.Outside | Village map created: 40x30 with 5 houses and cave entrance
+2025-10-04 00:42:21,887 | INFO     | PokemonFaiths.Outside | Loading outside position from save: (332, 222)
+2025-10-04 00:42:22,007 | INFO     | PokemonFaiths.Outside | Outside scene initialized
+2025-10-04 00:42:22,008 | INFO     | PokemonFaiths.Outside | Outside scene started
+2025-10-04 00:42:23,253 | INFO     | PokemonFaiths.Entities | Sprint: ON
+2025-10-04 00:42:31,307 | INFO     | PokemonFaiths.Outside | Player entering cave!
+2025-10-04 00:42:31,308 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:42:31,308 | INFO     | PokemonFaiths.Outside | Set cave spawn to center: (340, 170)
+2025-10-04 00:42:31,308 | INFO     | PokemonFaiths.Outside | Player entering cave
+2025-10-04 00:42:31,314 | INFO     | PokemonFaiths.Outside | Outside scene exited
+2025-10-04 00:42:31,318 | INFO     | PokemonFaiths.Main | Entering cave...
+2025-10-04 00:42:31,342 | INFO     | PokemonFaiths.Cave | Cave map created: 20x10 with 24 grass encounter tiles
+2025-10-04 00:42:31,696 | INFO     | PokemonFaiths.Cave | Cave scene initialized
+2025-10-04 00:42:33,364 | INFO     | PokemonFaiths.Entities | Sprint: ON
+2025-10-04 00:42:36,031 | INFO     | PokemonFaiths.Entities | Sprint: OFF
+2025-10-04 00:42:42,066 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:42:53,147 | INFO     | PokemonFaiths.Entities | Sprint: ON
+2025-10-04 00:42:53,711 | INFO     | PokemonFaiths.Cave | Wild encounter triggered!
+2025-10-04 00:42:53,711 | INFO     | PokemonFaiths.Cave | Wild Gastly (Lv.5) appeared!
+2025-10-04 00:42:59,317 | INFO     | PokemonFaiths.Cave | Wild encounter triggered!
+2025-10-04 00:42:59,317 | INFO     | PokemonFaiths.Cave | Wild Zubat (Lv.5) appeared!
+2025-10-04 00:43:03,535 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:43:03,649 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Shutdown ===

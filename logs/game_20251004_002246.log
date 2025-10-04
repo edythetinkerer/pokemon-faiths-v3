@@ -1,0 +1,23 @@
+2025-10-04 00:22:46,399 | INFO     | PokemonFaiths   | Logging to file: logs\game_20251004_002246.log
+2025-10-04 00:22:46,403 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Starting ===
+2025-10-04 00:22:47,265 | INFO     | PokemonFaiths.Main | Pygame initialized successfully
+2025-10-04 00:22:47,266 | INFO     | PokemonFaiths.AudioManager | Audio system initialized successfully
+2025-10-04 00:22:47,266 | INFO     | PokemonFaiths.Settings | Loaded settings: Music=100%, SFX=100%
+2025-10-04 00:22:47,271 | INFO     | PokemonFaiths.AudioManager | Playing music: menu
+2025-10-04 00:22:47,272 | INFO     | PokemonFaiths.StartScreen | Save file exists: True
+2025-10-04 00:22:47,366 | INFO     | PokemonFaiths.StartScreen | Starting Pokémon Faiths start screen...
+2025-10-04 00:22:50,317 | INFO     | PokemonFaiths.StartScreen | Start screen exited with selection: continue
+2025-10-04 00:22:50,323 | INFO     | PokemonFaiths.Main | Loading saved game...
+2025-10-04 00:22:50,323 | INFO     | PokemonFaiths.SaveManager | Game loaded successfully (Player: edy)
+2025-10-04 00:22:50,324 | INFO     | PokemonFaiths.Main | Loaded save for: edy
+2025-10-04 00:22:50,490 | INFO     | PokemonFaiths.Outside | Outdoor assets loaded
+2025-10-04 00:22:50,490 | INFO     | PokemonFaiths.Outside | Village map created: 40x30 with 5 houses and cave entrance
+2025-10-04 00:22:50,490 | INFO     | PokemonFaiths.Outside | Loading outside position from save: (423, 239)
+2025-10-04 00:22:50,495 | INFO     | PokemonFaiths.Outside | Outside scene initialized
+2025-10-04 00:22:50,496 | INFO     | PokemonFaiths.Outside | Outside scene started
+2025-10-04 00:22:56,729 | INFO     | PokemonFaiths.Outside | Debug mode: ON
+2025-10-04 00:22:58,357 | INFO     | PokemonFaiths.Outside | Quit event received
+2025-10-04 00:22:58,358 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:22:58,358 | INFO     | PokemonFaiths.Outside | Game saved successfully
+2025-10-04 00:22:58,365 | INFO     | PokemonFaiths.Outside | Outside scene exited
+2025-10-04 00:22:58,474 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Shutdown ===

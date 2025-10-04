@@ -1,0 +1,41 @@
+2025-10-04 00:19:35,684 | INFO     | PokemonFaiths   | Logging to file: logs\game_20251004_001935.log
+2025-10-04 00:19:35,690 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Starting ===
+2025-10-04 00:19:36,575 | INFO     | PokemonFaiths.Main | Pygame initialized successfully
+2025-10-04 00:19:36,577 | INFO     | PokemonFaiths.AudioManager | Audio system initialized successfully
+2025-10-04 00:19:36,577 | INFO     | PokemonFaiths.Settings | Loaded settings: Music=100%, SFX=100%
+2025-10-04 00:19:36,583 | INFO     | PokemonFaiths.AudioManager | Playing music: menu
+2025-10-04 00:19:36,585 | INFO     | PokemonFaiths.StartScreen | Save file exists: True
+2025-10-04 00:19:36,733 | INFO     | PokemonFaiths.StartScreen | Starting Pokémon Faiths start screen...
+2025-10-04 00:19:37,584 | INFO     | PokemonFaiths.StartScreen | Start screen exited with selection: continue
+2025-10-04 00:19:37,587 | INFO     | PokemonFaiths.Main | Loading saved game...
+2025-10-04 00:19:37,588 | INFO     | PokemonFaiths.SaveManager | Game loaded successfully (Player: edy)
+2025-10-04 00:19:37,588 | INFO     | PokemonFaiths.Main | Loaded save for: edy
+2025-10-04 00:19:37,875 | INFO     | PokemonFaiths.Cave | Cave scene initialized
+2025-10-04 00:19:40,091 | INFO     | PokemonFaiths.Entities | Sprint: ON
+2025-10-04 00:19:41,457 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:19:41,470 | INFO     | PokemonFaiths.Main | Exiting cave...
+2025-10-04 00:19:41,637 | INFO     | PokemonFaiths.Outside | Outdoor assets loaded
+2025-10-04 00:19:41,637 | INFO     | PokemonFaiths.Outside | Village map created: 40x30 with 5 houses and cave entrance
+2025-10-04 00:19:41,638 | INFO     | PokemonFaiths.Outside | Loading outside position from save: (1230, 134)
+2025-10-04 00:19:41,682 | INFO     | PokemonFaiths.Outside | Outside scene initialized
+2025-10-04 00:19:41,684 | INFO     | PokemonFaiths.Outside | Outside scene started
+2025-10-04 00:19:41,684 | INFO     | PokemonFaiths.Outside | Player entering cave!
+2025-10-04 00:19:41,685 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:19:41,686 | INFO     | PokemonFaiths.Outside | Set cave spawn to center: (340, 170)
+2025-10-04 00:19:41,686 | INFO     | PokemonFaiths.Outside | Player entering cave
+2025-10-04 00:19:41,703 | INFO     | PokemonFaiths.Outside | Outside scene exited
+2025-10-04 00:19:41,704 | INFO     | PokemonFaiths.Main | Entering cave...
+2025-10-04 00:19:41,954 | INFO     | PokemonFaiths.Cave | Cave scene initialized
+2025-10-04 00:19:46,806 | INFO     | PokemonFaiths.Entities | Sprint: ON
+2025-10-04 00:19:48,250 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:19:48,258 | INFO     | PokemonFaiths.Main | Exiting cave...
+2025-10-04 00:19:48,263 | INFO     | PokemonFaiths.Outside | Outdoor assets loaded
+2025-10-04 00:19:48,263 | INFO     | PokemonFaiths.Outside | Village map created: 40x30 with 5 houses and cave entrance
+2025-10-04 00:19:48,263 | INFO     | PokemonFaiths.Outside | Loading outside position from save: (1230, 134)
+2025-10-04 00:19:48,306 | INFO     | PokemonFaiths.Outside | Outside scene initialized
+2025-10-04 00:19:48,306 | INFO     | PokemonFaiths.Outside | Outside scene started
+2025-10-04 00:19:50,372 | INFO     | PokemonFaiths.Outside | Quit event received
+2025-10-04 00:19:50,373 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:19:50,373 | INFO     | PokemonFaiths.Outside | Game saved successfully
+2025-10-04 00:19:50,392 | INFO     | PokemonFaiths.Outside | Outside scene exited
+2025-10-04 00:19:50,515 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Shutdown ===

@@ -1,0 +1,15 @@
+2025-10-04 00:10:06,557 | INFO     | PokemonFaiths   | Logging to file: logs\game_20251004_001006.log
+2025-10-04 00:10:06,561 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Starting ===
+2025-10-04 00:10:07,443 | INFO     | PokemonFaiths.Main | Pygame initialized successfully
+2025-10-04 00:10:07,444 | INFO     | PokemonFaiths.AudioManager | Audio system initialized successfully
+2025-10-04 00:10:07,444 | INFO     | PokemonFaiths.Settings | Loaded settings: Music=100%, SFX=100%
+2025-10-04 00:10:07,451 | INFO     | PokemonFaiths.AudioManager | Playing music: menu
+2025-10-04 00:10:07,453 | INFO     | PokemonFaiths.StartScreen | Save file exists: True
+2025-10-04 00:10:07,515 | INFO     | PokemonFaiths.StartScreen | Starting Pokémon Faiths start screen...
+2025-10-04 00:10:08,642 | INFO     | PokemonFaiths.StartScreen | Start screen exited with selection: continue
+2025-10-04 00:10:08,646 | INFO     | PokemonFaiths.Main | Loading saved game...
+2025-10-04 00:10:08,646 | INFO     | PokemonFaiths.SaveManager | Game loaded successfully (Player: edy)
+2025-10-04 00:10:08,647 | INFO     | PokemonFaiths.Main | Loaded save for: edy
+2025-10-04 00:10:08,755 | INFO     | PokemonFaiths.Cave | Cave scene initialized
+2025-10-04 00:10:16,323 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:10:16,402 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Shutdown ===

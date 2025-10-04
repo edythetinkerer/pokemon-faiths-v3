@@ -1,0 +1,10 @@
+2025-10-03 20:59:30,146 | INFO     | PokemonFaiths   | Logging to file: logs\game_20251003_205930.log
+2025-10-03 20:59:30,193 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Starting ===
+2025-10-03 20:59:31,321 | INFO     | PokemonFaiths.Main | Pygame initialized successfully
+2025-10-03 20:59:31,331 | INFO     | PokemonFaiths.AudioManager | Audio system initialized successfully
+2025-10-03 20:59:31,383 | WARNING  | PokemonFaiths.AudioManager | Music file not found: assets/audio/music/menu_theme.mp3
+2025-10-03 20:59:31,383 | INFO     | PokemonFaiths.StartScreen | Save file exists: False
+2025-10-03 20:59:31,570 | INFO     | PokemonFaiths.StartScreen | Starting Pokémon Faiths start screen...
+2025-10-03 20:59:35,962 | ERROR    | PokemonFaiths.Main | Unexpected error in start screen: No file 'assets/audio/sfx/button_click.wav' found in working directory 'C:\Users\edy\Desktop\Faith\src'.
+2025-10-03 20:59:35,967 | INFO     | PokemonFaiths.Main | Game quit by user
+2025-10-03 20:59:36,075 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Shutdown ===

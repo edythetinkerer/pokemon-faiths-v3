@@ -1,0 +1,32 @@
+2025-10-04 00:18:07,176 | INFO     | PokemonFaiths   | Logging to file: logs\game_20251004_001807.log
+2025-10-04 00:18:07,180 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Starting ===
+2025-10-04 00:18:08,059 | INFO     | PokemonFaiths.Main | Pygame initialized successfully
+2025-10-04 00:18:08,059 | INFO     | PokemonFaiths.AudioManager | Audio system initialized successfully
+2025-10-04 00:18:08,060 | INFO     | PokemonFaiths.Settings | Loaded settings: Music=100%, SFX=100%
+2025-10-04 00:18:08,067 | INFO     | PokemonFaiths.AudioManager | Playing music: menu
+2025-10-04 00:18:08,070 | INFO     | PokemonFaiths.StartScreen | Save file exists: True
+2025-10-04 00:18:08,129 | INFO     | PokemonFaiths.StartScreen | Starting Pokémon Faiths start screen...
+2025-10-04 00:18:09,294 | INFO     | PokemonFaiths.StartScreen | Start screen exited with selection: continue
+2025-10-04 00:18:09,297 | INFO     | PokemonFaiths.Main | Loading saved game...
+2025-10-04 00:18:09,298 | INFO     | PokemonFaiths.SaveManager | Game loaded successfully (Player: edy)
+2025-10-04 00:18:09,298 | INFO     | PokemonFaiths.Main | Loaded save for: edy
+2025-10-04 00:18:09,465 | INFO     | PokemonFaiths.Outside | Outdoor assets loaded
+2025-10-04 00:18:09,466 | INFO     | PokemonFaiths.Outside | Village map created: 40x30 with 5 houses and cave entrance
+2025-10-04 00:18:09,466 | INFO     | PokemonFaiths.Outside | Loading outside position from save: (490, 236)
+2025-10-04 00:18:09,518 | INFO     | PokemonFaiths.Outside | Outside scene initialized
+2025-10-04 00:18:09,519 | INFO     | PokemonFaiths.Outside | Outside scene started
+2025-10-04 00:18:15,791 | INFO     | PokemonFaiths.Outside | Player entering house door - going to bedroom!
+2025-10-04 00:18:15,792 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:18:15,792 | INFO     | PokemonFaiths.Outside | Set bedroom spawn to: (238, 310)
+2025-10-04 00:18:15,792 | INFO     | PokemonFaiths.Outside | Player entering house - teleporting to bedroom
+2025-10-04 00:18:15,809 | INFO     | PokemonFaiths.Outside | Outside scene exited
+2025-10-04 00:18:15,809 | INFO     | PokemonFaiths.Main | Returning to bedroom...
+2025-10-04 00:18:15,951 | INFO     | PokemonFaiths.Bedroom | Bedroom assets loaded successfully
+2025-10-04 00:18:15,952 | INFO     | PokemonFaiths.Bedroom | Loading player position from save: (238, 310)
+2025-10-04 00:18:16,001 | INFO     | PokemonFaiths.Bedroom | Bedroom scene initialized
+2025-10-04 00:18:16,002 | INFO     | PokemonFaiths.Bedroom | Bedroom scene started
+2025-10-04 00:18:17,973 | INFO     | PokemonFaiths.Bedroom | Quit event received
+2025-10-04 00:18:17,974 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:18:17,975 | INFO     | PokemonFaiths.Bedroom | Game saved successfully
+2025-10-04 00:18:17,982 | INFO     | PokemonFaiths.Bedroom | Bedroom scene exited
+2025-10-04 00:18:18,051 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Shutdown ===

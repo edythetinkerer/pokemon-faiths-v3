@@ -1,0 +1,38 @@
+2025-10-04 00:51:00,429 | INFO     | PokemonFaiths   | Logging to file: logs\game_20251004_005100.log
+2025-10-04 00:51:00,433 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Starting ===
+2025-10-04 00:51:01,288 | INFO     | PokemonFaiths.Main | Pygame initialized successfully
+2025-10-04 00:51:01,289 | INFO     | PokemonFaiths.AudioManager | Audio system initialized successfully
+2025-10-04 00:51:01,290 | INFO     | PokemonFaiths.Settings | Loaded settings: Music=100%, SFX=100%
+2025-10-04 00:51:01,294 | INFO     | PokemonFaiths.AudioManager | Playing music: menu
+2025-10-04 00:51:01,299 | INFO     | PokemonFaiths.StartScreen | Save file exists: True
+2025-10-04 00:51:01,436 | INFO     | PokemonFaiths.StartScreen | Starting Pokémon Faiths start screen...
+2025-10-04 00:51:04,755 | INFO     | PokemonFaiths.StartScreen | Start screen exited with selection: continue
+2025-10-04 00:51:04,762 | INFO     | PokemonFaiths.Main | Loading saved game...
+2025-10-04 00:51:04,763 | INFO     | PokemonFaiths.SaveManager | Updated old save to new teleport system (in front of door)
+2025-10-04 00:51:04,764 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:51:04,765 | INFO     | PokemonFaiths.SaveManager | Game loaded successfully (Player: edy)
+2025-10-04 00:51:04,765 | INFO     | PokemonFaiths.Main | Loaded save for: edy
+2025-10-04 00:51:04,857 | INFO     | PokemonFaiths.Cave | Cave map created: 20x10 with 24 grass encounter tiles
+2025-10-04 00:51:05,242 | INFO     | PokemonFaiths.Cave | Cave scene initialized
+2025-10-04 00:51:11,251 | INFO     | PokemonFaiths.Cave | Wild encounter triggered!
+2025-10-04 00:51:11,251 | INFO     | PokemonFaiths.Cave | Wild Zubat (Lv.6) appeared!
+2025-10-04 00:51:11,252 | INFO     | PokemonFaiths.Cave | Starting battle with Zubat!
+2025-10-04 00:51:11,252 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:51:11,253 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:51:11,253 | INFO     | PokemonFaiths.Cave | Battle system integration pending...
+2025-10-04 00:51:12,637 | INFO     | PokemonFaiths.Cave | Starting battle transition!
+2025-10-04 00:51:12,655 | INFO     | PokemonFaiths.Main | Starting battle from cave...
+2025-10-04 00:51:12,667 | ERROR    | PokemonFaiths.Main | Unexpected error in battle scene: Pokemon.__init__() got an unexpected keyword argument 'level'
+Traceback (most recent call last):
+  File "C:\Users\edy\Desktop\Faith\src\main.py", line 149, in run_battle_scene
+    player_pokemon = Pokemon(
+        species=player_pokemon_data['name'],
+        level=player_pokemon_data['level'],
+        nickname=player_pokemon_data.get('nickname', player_pokemon_data['name'])
+    )
+TypeError: Pokemon.__init__() got an unexpected keyword argument 'level'
+2025-10-04 00:51:12,668 | ERROR    | PokemonFaiths.Main | Battle error, returning to cave
+2025-10-04 00:51:12,672 | INFO     | PokemonFaiths.Cave | Cave map created: 20x10 with 24 grass encounter tiles
+2025-10-04 00:51:13,055 | INFO     | PokemonFaiths.Cave | Cave scene initialized
+2025-10-04 00:51:18,545 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:51:18,700 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Shutdown ===

@@ -1,0 +1,54 @@
+2025-10-04 00:57:27,213 | INFO     | PokemonFaiths   | Logging to file: logs\game_20251004_005727.log
+2025-10-04 00:57:27,217 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Starting ===
+2025-10-04 00:57:27,390 | INFO     | PokemonFaiths.Main | Pygame initialized successfully
+2025-10-04 00:57:27,391 | INFO     | PokemonFaiths.AudioManager | Audio system initialized successfully
+2025-10-04 00:57:27,392 | INFO     | PokemonFaiths.Settings | Loaded settings: Music=100%, SFX=100%
+2025-10-04 00:57:27,402 | INFO     | PokemonFaiths.AudioManager | Playing music: menu
+2025-10-04 00:57:27,404 | INFO     | PokemonFaiths.StartScreen | Save file exists: True
+2025-10-04 00:57:27,556 | INFO     | PokemonFaiths.StartScreen | Starting Pokémon Faiths start screen...
+2025-10-04 00:57:28,679 | INFO     | PokemonFaiths.StartScreen | Start screen exited with selection: continue
+2025-10-04 00:57:28,683 | INFO     | PokemonFaiths.Main | Loading saved game...
+2025-10-04 00:57:28,684 | INFO     | PokemonFaiths.SaveManager | Game loaded successfully (Player: edy)
+2025-10-04 00:57:28,684 | INFO     | PokemonFaiths.Main | Loaded save for: edy
+2025-10-04 00:57:28,771 | INFO     | PokemonFaiths.Cave | Cave map created: 20x10 with 24 grass encounter tiles
+2025-10-04 00:57:29,119 | INFO     | PokemonFaiths.Cave | Cave scene initialized
+2025-10-04 00:57:31,384 | INFO     | PokemonFaiths.Entities | Sprint: ON
+2025-10-04 00:57:32,128 | INFO     | PokemonFaiths.Entities | Sprint: OFF
+2025-10-04 00:57:33,134 | INFO     | PokemonFaiths.Entities | Sprint: ON
+2025-10-04 00:57:34,305 | INFO     | PokemonFaiths.Entities | Sprint: OFF
+2025-10-04 00:57:35,017 | INFO     | PokemonFaiths.Entities | Sprint: ON
+2025-10-04 00:57:41,837 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:57:41,850 | INFO     | PokemonFaiths.Main | Exiting cave...
+2025-10-04 00:57:41,948 | INFO     | PokemonFaiths.Outside | Outdoor assets loaded
+2025-10-04 00:57:41,948 | INFO     | PokemonFaiths.Outside | Village map created: 40x30 with 5 houses and cave entrance
+2025-10-04 00:57:41,948 | INFO     | PokemonFaiths.Outside | Loading outside position from save: (1230, 134)
+2025-10-04 00:57:42,064 | INFO     | PokemonFaiths.Outside | Outside scene initialized
+2025-10-04 00:57:42,065 | INFO     | PokemonFaiths.Outside | Outside scene started
+2025-10-04 00:57:42,813 | INFO     | PokemonFaiths.Outside | Player entering cave!
+2025-10-04 00:57:42,814 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:57:42,815 | INFO     | PokemonFaiths.Outside | Set cave spawn to entrance: (340, 238)
+2025-10-04 00:57:42,815 | INFO     | PokemonFaiths.Outside | Player entering cave
+2025-10-04 00:57:42,821 | INFO     | PokemonFaiths.Outside | Outside scene exited
+2025-10-04 00:57:42,824 | INFO     | PokemonFaiths.Main | Entering cave...
+2025-10-04 00:57:42,828 | INFO     | PokemonFaiths.Cave | Cave map created: 20x10 with 24 grass encounter tiles
+2025-10-04 00:57:43,171 | INFO     | PokemonFaiths.Cave | Cave scene initialized
+2025-10-04 00:57:51,604 | INFO     | PokemonFaiths.Entities | Sprint: ON
+2025-10-04 00:57:51,684 | INFO     | PokemonFaiths.Cave | Wild encounter triggered!
+2025-10-04 00:57:51,685 | INFO     | PokemonFaiths.Cave | Wild Zubat (Lv.3) appeared!
+2025-10-04 00:57:51,685 | INFO     | PokemonFaiths.Cave | Starting battle with Zubat!
+2025-10-04 00:57:51,685 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:57:51,686 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:57:51,686 | INFO     | PokemonFaiths.Cave | Battle system integration pending...
+2025-10-04 00:57:53,040 | INFO     | PokemonFaiths.Cave | Starting battle transition!
+2025-10-04 00:57:53,055 | INFO     | PokemonFaiths.Main | Starting battle from cave...
+2025-10-04 00:57:53,057 | INFO     | PokemonFaiths.Moves | Move database initialized with 7 moves
+2025-10-04 00:57:53,176 | INFO     | PokemonFaiths.Battle | Battle started: Ember vs Zubat
+2025-10-04 00:57:53,177 | INFO     | PokemonFaiths.Battle | Battle loop started
+2025-10-04 00:57:55,978 | INFO     | PokemonFaiths.Battle | Ember retreated from battle
+2025-10-04 00:57:55,985 | INFO     | PokemonFaiths.Battle | Battle ended: retreat
+2025-10-04 00:57:55,986 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:57:55,987 | INFO     | PokemonFaiths.Main | Battle ended with outcome: retreat
+2025-10-04 00:57:55,996 | INFO     | PokemonFaiths.Cave | Cave map created: 20x10 with 24 grass encounter tiles
+2025-10-04 00:57:56,337 | INFO     | PokemonFaiths.Cave | Cave scene initialized
+2025-10-04 00:57:58,127 | INFO     | PokemonFaiths.SaveManager | Game saved successfully
+2025-10-04 00:57:58,281 | INFO     | PokemonFaiths.Main | === Pokemon Faiths Shutdown ===

@@ -1,0 +1,2 @@
+# Pokemon Faiths Game Package
+
